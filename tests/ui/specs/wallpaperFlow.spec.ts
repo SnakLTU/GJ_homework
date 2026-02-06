@@ -20,7 +20,7 @@ test.describe('Wallpaper Flow Test Suite', () => {
         await expect(browsePage.searchInputCancelButton).toBeVisible(); //Step 6: Verify that Cancel button is visible
         await expect(browsePage.searchInputButton).toBeVisible(); //Step 7: Verify that Search button is visible
         await browsePage.clickSearchButton(); //Step 8: Click on Search button
-        await expect(browsePage.page).toHaveURL(new RegExp(`wallpapers\\?keyword=${wallpapersFlowData.searchKeyword}`))
+        await expect(browsePage.page).toHaveURL(new RegExp(`wallpapers\\?keyword=${wallpapersFlowData.searchKeyword}`)) // Step 9: Verifi that search worked as expected
         //Search Results Page Steps
         await expect(searchResultsPage.wallpapersHeader).toBeVisible(); //Step 10: Verify that Wallpapers heading is visible
         searchResultsPage.countResults(); //Step 11: Count and log the number of free and premium wallpapers    
