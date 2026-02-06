@@ -10,7 +10,6 @@ export class SearchResultsPage {
     readonly freeWallpapers: Locator;
 
 
-
     constructor(page: Page) {
         this.page = page;
         this.wallpapersHeader= page.getByRole('heading', { name: 'Wallpapers' });
@@ -18,13 +17,16 @@ export class SearchResultsPage {
         this.premiumWithPriceWallpapers = page.getByRole('main').getByRole('link').locator('[class="Card_card-footer__I2PFs"]');
         this.allWallpapers = page.getByRole('main').getByRole('link').locator('[class="Card_card__DE_00 aspect-wallpaper"]')
         this.freeWallpapers = page.getByRole('main').getByRole('link')
-                                  .locator('[class="Card_card__DE_00 aspect-wallpaper"]', 
-                                            { hasNot: page.locator('[class="Card_card-footer__I2PFs"]') }
-                                        );
+                                  .locator('[class="Card_card__DE_00 aspect-wallpaper"]')
+                                  .filter({ hasNot: page.locator('[class="Card_card-footer__I2PFs"]') })                   
     };
     
     async gotoWallpapers(keyword: string) {
         await this.page.goto(`/wallpapers?keyword=${keyword}`);
+    };
+
+    async clickFirstFreeWallpaper() {
+        await this.freeWallpapers.first().click()
     };
 
     async countResults() {
@@ -37,7 +39,7 @@ export class SearchResultsPage {
         console.log(`Premium wallpapers count: ${await premiumWallpapersCollect.count()}`);
         console.log(`Premium with Price wallpapers count: ${await premiumWithPriceCollect.count()}`);
         console.log(`Free wallpapers count: ${await freeWallpapersCollect.count()}`);
-    }
+    };
 };
 
 

@@ -1,12 +1,7 @@
-import { Locator } from '@playwright/test';
-import { test, expect } from './base.ts';
-
+import { test, expect } from '../base.ts';
 import { wallpapersFlowData} from '../data/wallpapersFlow.data.ts'
 
-
 test.describe('Wallpaper Flow Test Suite', () => {
-
-    test.describe.configure({mode: 'serial'});
 
     test('Wallpaper flow test, count free and premiuim', 
         async ({ homePage, 
@@ -29,5 +24,19 @@ test.describe('Wallpaper Flow Test Suite', () => {
         await searchResultsPage.gotoWallpapers(wallpapersFlowData.searchKeyword); //Step 9: Navigate to wallpapers page with keyword
         await expect(searchResultsPage.wallpapersHeader).toBeVisible(); //Step 10: Verify that Wallpapers heading is visible
         searchResultsPage.countResults(); //Step 11: Count and log the number of free and premium wallpapers    
+    });
+
+    test('Wallpaper flow test, download free wallpaper', 
+        async ({ homePage, 
+                 searchResultsPage,
+                 wallpaperPage
+            }) => {
+        await searchResultsPage.gotoWallpapers(wallpapersFlowData.searchKeyword); //Step 1: Navigate to wallpapers page with keyword
+        await homePage.clickAcceptCookies(); //Step 2: Accept Cookies
+        await searchResultsPage.clickFirstFreeWallpaper(); //Step 3: Click on first free wallpaper
+        await expect(wallpaperPage.downloadButton).toBeVisible(); //Step 4: Verify that Download button is visible
+        const downloadedFileName: string = await wallpaperPage.downloadWallpaper(); //Step 5: Iniciate wallpaper download, wait for add to expire
+        expect(wallpaperPage.getDownloadedFile(downloadedFileName)).toBeTruthy(); //Step 6: Check that download was successful
+        wallpaperPage.deleteDownloadedFile(downloadedFileName) //Step 7: Clean up downloaded file
     });
 });
