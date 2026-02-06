@@ -19,7 +19,7 @@ jobs:
     - uses: actions/checkout@v4
     - name: Setup .env file
       run: |
-        mdirk -p .env
+        mkdir -p .env
         echo "BASE_URL=$BASE_URL" >> .env/$ENV.env
         echo "DOWNLOAD_PATH=$DOWNLOAD_PATH" >> .env/$ENV.env
         echo "TEST_SEED=$TEST_SEED" >> .env/$ENV.env
