@@ -18,7 +18,7 @@ export class BrowsePage {
 
     async selectCategoryFromDropdown(category: string) {
         await this.searchInputDropdown.click();
-        const categoryOption = this.page.getByRole('menuitemradio', { name: category })
+        const categoryOption = this.page.getByRole('menuitemradio', { name: category });
         await categoryOption.click();
     };
 

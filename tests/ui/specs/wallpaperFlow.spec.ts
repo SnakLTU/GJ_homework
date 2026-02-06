@@ -1,5 +1,5 @@
 import { test, expect } from '../base.ts';
-import { wallpapersFlowData} from '../data/wallpapersFlow.data.ts'
+import { wallpapersFlowData} from '../data/wallpapersFlow.data.ts';
 
 
 test.describe('Wallpaper Flow Test Suite', () => {
@@ -20,7 +20,7 @@ test.describe('Wallpaper Flow Test Suite', () => {
         await expect(browsePage.searchInputCancelButton).toBeVisible(); //Step 6: Verify that Cancel button is visible
         await expect(browsePage.searchInputButton).toBeVisible(); //Step 7: Verify that Search button is visible
         await browsePage.clickSearchButton(); //Step 8: Click on Search button
-        await expect(browsePage.page).toHaveURL(new RegExp(`wallpapers\\?keyword=${wallpapersFlowData.searchKeyword}`)) // Step 9: Verifi that search worked as expected
+        await expect(browsePage.page).toHaveURL(new RegExp(`wallpapers\\?keyword=${wallpapersFlowData.searchKeyword}`)); // Step 9: Verifi that search worked as expected
         //Search Results Page Steps
         await expect(searchResultsPage.wallpapersHeader).toBeVisible(); //Step 10: Verify that Wallpapers heading is visible
         searchResultsPage.countResults(); //Step 11: Count and log the number of free and premium wallpapers    
@@ -32,13 +32,13 @@ test.describe('Wallpaper Flow Test Suite', () => {
                  wallpaperPage,
                  browserName
             }) => {
-        test.skip(browserName == 'webkit', 'Download file does not work on Safari')
+        test.skip(browserName == 'webkit', 'Download file does not work on Safari');
         await searchResultsPage.gotoWallpapers(wallpapersFlowData.searchKeyword); //Step 1: Navigate to wallpapers page with keyword
         await cookiesModule.clickAcceptCookies(); //Step 2: Accept Cookies
         await searchResultsPage.clickFirstFreeWallpaper(); //Step 3: Click on first free wallpaper
         await expect(wallpaperPage.downloadButton).toBeVisible(); //Step 4: Verify that Download button is visible
         const downloadedFileName: string = await wallpaperPage.downloadWallpaper(); //Step 5: Iniciate wallpaper download, wait for add to expire
         expect(wallpaperPage.getDownloadedFile(downloadedFileName)).toBeTruthy(); //Step 6: Check that download was successful
-        wallpaperPage.deleteDownloadedFile(downloadedFileName) //Step 7: Clean up downloaded file
+        wallpaperPage.deleteDownloadedFile(downloadedFileName); //Step 7: Clean up downloaded file
     });
 });
