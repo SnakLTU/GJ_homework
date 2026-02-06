@@ -1,8 +1,9 @@
 import { type Page, type Locator } from "@playwright/test";
 
+
 export class CookiesModule {
-    readonly page: Page
-    readonly acceptCookiesButton: Locator
+    readonly page: Page;
+    readonly acceptCookiesButton: Locator;
 
     constructor(page: Page){
         this.page = page;

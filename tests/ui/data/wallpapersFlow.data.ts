@@ -1,7 +1,8 @@
 import { faker } from '@faker-js/faker/locale/en';
 
-const seedValue: number = parseInt(process.env.TEST_SEED || '0')
-faker.seed(seedValue)
+
+const seedValue: number = parseInt(process.env.TEST_SEED || '0');
+faker.seed(seedValue);
 
 interface WallpapersFlowData {
     searchKeyword: string;

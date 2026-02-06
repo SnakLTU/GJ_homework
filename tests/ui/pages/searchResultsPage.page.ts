@@ -5,20 +5,19 @@ export class SearchResultsPage {
     readonly page: Page;
     readonly wallpapersHeader: Locator;
     readonly premiumWallpapers: Locator;
-    readonly premiumWithPriceWallpapers: Locator
+    readonly premiumWithPriceWallpapers: Locator;
     readonly allWallpapers: Locator;
     readonly freeWallpapers: Locator;
-
 
     constructor(page: Page) {
         this.page = page;
         this.wallpapersHeader= page.getByRole('heading', { name: 'Wallpapers' });
         this.premiumWallpapers = page.getByRole('main').getByRole('link').locator('[class="Card_card-header__itIwa"]');
         this.premiumWithPriceWallpapers = page.getByRole('main').getByRole('link').locator('[class="Card_card-footer__I2PFs"]');
-        this.allWallpapers = page.getByRole('main').getByRole('link').locator('[class="Card_card__DE_00 aspect-wallpaper"]')
+        this.allWallpapers = page.getByRole('main').getByRole('link').locator('[class="Card_card__DE_00 aspect-wallpaper"]');
         this.freeWallpapers = page.getByRole('main').getByRole('link')
                                   .locator('[class="Card_card__DE_00 aspect-wallpaper"]')
-                                  .filter({ hasNot: page.locator('[class="Card_card-footer__I2PFs"]') })                   
+                                  .filter({ hasNot: page.locator('[class="Card_card-footer__I2PFs"]') });             
     };
     
     async gotoWallpapers(keyword: string) {
@@ -26,7 +25,7 @@ export class SearchResultsPage {
     };
 
     async clickFirstFreeWallpaper() {
-        await this.freeWallpapers.first().click()
+        await this.freeWallpapers.first().click();
     };
 
     async countResults() {
