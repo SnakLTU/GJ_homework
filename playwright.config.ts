@@ -7,6 +7,7 @@ import { defineConfig, devices } from '@playwright/test';
 import dotenv from 'dotenv';
 import path from 'path';
 dotenv.config({ path: path.resolve(__dirname, '.env', `${process.env.ENV}.env`) });
+dotenv.config({ quiet: true });
 
 const testSeed = Date.now().toString()
 console.log(`Running tests using testSeed: ${testSeed}`)
