@@ -4,12 +4,25 @@ on:
     branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
+
+env:
+  BASE_URL: ${{ secrets.BASE_URL }}
+  DOWNLOAD_PATH: ${{ vars.DOWNLOAD_PATH}}
+  TEST_SEED: ${{ vars.TEST_SEED }}
+  ENV: ${{ vars.ENV }}
+
 jobs:
-  test:
+  playwright-tests:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    - name: Setup .env file
+      run: |
+        mkdir -p .env
+        echo "BASE_URL=$BASE_URL" >> .env/$ENV.env
+        echo "DOWNLOAD_PATH=$DOWNLOAD_PATH" >> .env/$ENV.env
+        echo "TEST_SEED=$TEST_SEED" >> .env/$ENV.env
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
@@ -18,7 +31,7 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
-      run: npx playwright test
+      run: node --run test-ci-cd
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
