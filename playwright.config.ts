@@ -8,6 +8,10 @@ import dotenv from 'dotenv';
 import path from 'path';
 dotenv.config({ path: path.resolve(__dirname, '.env', `${process.env.ENV}.env`) });
 
+const testSeed = Date.now().toString()
+console.log(`Running tests using testSeed: ${testSeed}`)
+process.env['TEST_SEED'] = testSeed
+
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
